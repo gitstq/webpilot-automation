@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "webpilot"
+version = "1.0.0"
+description = "新一代CDP浏览器自动化引擎 - AI驱动、反检测增强、国内平台适配"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "WebPilot Team", email = "dev@webpilot.dev"}
+]
+keywords = ["browser", "automation", "cdp", "chrome", "ai", "scraping", "webdriver"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP :: Browsers",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "aiohttp>=3.9.0",
+    "aiofiles>=23.2.0",
+    "pydantic>=2.5.0",
+    "typing-extensions>=4.8.0",
+    "websockets>=12.0",
+]
+
+[project.optional-dependencies]
+ai = ["openai>=1.0.0", "zhipuai>=2.0.0"]
+dev = ["pytest>=7.4.0", "pytest-asyncio>=0.21.0", "pytest-cov>=4.1.0", "black>=23.0.0", "ruff>=0.1.0", "mypy>=1.7.0"]
+all = ["webpilot[ai,dev]"]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/webpilot"
+Documentation = "https://github.com/yourusername/webpilot#readme"
+Repository = "https://github.com/yourusername/webpilot"
+Issues = "https://github.com/yourusername/webpilot/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.black]
+line-length = 100
+target-version = ['py310']
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+addopts = "--cov=webpilot --cov-report=term-missing"
